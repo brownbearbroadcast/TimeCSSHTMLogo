@@ -165,6 +165,9 @@ document.getElementById("thirdInput").addEventListener("keydown", e => {
         break;
       }
       if (numArr.includes(e.key)) {
+          if(e.key != '0' && thirdValArr[9] == '0' && dFArr.includes(thirdValArr[10])){
+          thirdValArr[10] = '2';
+        }
         setThirdValueAndCaret(4, e.key, index + 1);
         break;
       }

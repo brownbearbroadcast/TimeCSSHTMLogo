@@ -3,12 +3,36 @@ document.getElementById("operation").addEventListener("change", e => {
 
   if (document.getElementById("operation").value == "Logo Insertion") {
     console.log(document.getElementById("operation").value);
-   $("#third").show();
-   $("#padding").show();
+    $("#third").show();
+    $("#padding").show();
+    document.getElementById("topLabel").innerHTML = "Segment Start: "
+    document.getElementById("top").setAttribute("class","segmentStart");
+    document.getElementById("bottomLabel").innerHTML = "Logo In: ";
+    document.getElementById("bottom").setAttribute("class","logoIn");
   }
-  else{
+  else if (document.getElementById("operation").value == "Addition") {
    $("#third").hide();
    $("#padding").hide();
+   document.getElementById("topLabel").innerHTML = "Original: "
+   document.getElementById("top").setAttribute("class","original");
+   document.getElementById("bottomLabel").innerHTML = "Addend: ";
+   document.getElementById("bottom").setAttribute("class","addend");
+  }
+  else if (document.getElementById("operation").value == "Subtraction") {
+   $("#third").hide();
+   $("#padding").hide();
+   document.getElementById("topLabel").innerHTML = "Original: "
+   document.getElementById("top").setAttribute("class","original");
+   document.getElementById("bottomLabel").innerHTML = "Minuend: ";
+   document.getElementById("bottom").setAttribute("class","minuend");
+  }
+  else if (document.getElementById("operation").value == "Duration") {
+   $("#third").hide();
+   $("#padding").hide();
+   document.getElementById("topLabel").innerHTML = "Start: "
+   document.getElementById("top").setAttribute("class","start");
+   document.getElementById("bottomLabel").innerHTML = "End: ";
+   document.getElementById("bottom").setAttribute("class","end");
   }
 });
 function flagSubmit(){

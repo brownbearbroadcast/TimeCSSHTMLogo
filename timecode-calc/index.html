@@ -14,23 +14,23 @@
   <div class="center">
     <h1>Timecode Calculator</h1>
   </div>
-  <div class="start">
-    <label for="start">Start:</label>
+  <div id="top" class="start">
+    <label id="topLabel" for="start">Start:</label>
     <input class="input" id="start" minlength="11" maxlength="11" inputmode=“numeric” pattern="[0-9]*"
       value="00:00:00:00" />
   </div>
   <p></p>
-  <div class="end">
-    <label for="end">End:</label>
+  <div id ="bottom" class="end">
+    <label id="bottomLabel" for="end">End:</label>
     <input class="input" id="end" minlength="11" maxlength="11" inputmode=“numeric” pattern="[0-9]*"
       value="00:00:00:00" />
     <p></p>
   </div>
 
-  <!--sloppy workaround for JQuery unintended behavior-->
+  <!--sloppy workaround for JQuery unintendeds behavior-->
   <p id="padding"></p>
-  <div class="third" id="third">
-     <label for="end">Third:</label><!--<h2>End Timecode</h2>-->
+  <div id = "third" class="logoOut">
+     <label id="thirdLabel" for="end">Logo Out:</label><!--<h2>End Timecode</h2>-->
     <input class="input" id="thirdInput" minlength="11" maxlength="11" inputmode=“numeric” pattern="[0-9]*"
       value="00:00:00:00" />
     <p></p>
