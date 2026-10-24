@@ -14,14 +14,14 @@
   <div class="center">
     <h1>Timecode Calculator</h1>
   </div>
-  <div class="center">
-
+  <div class="start">
+    <label for="start">Start:</label>
     <input class="input" id="start" minlength="11" maxlength="11" inputmode=“numeric” pattern="[0-9]*"
       value="00:00:00:00" />
   </div>
   <p></p>
-  <div class="center">
-    <!--<h2>End Timecode</h2>-->
+  <div class="end">
+    <label for="end">End:</label>
     <input class="input" id="end" minlength="11" maxlength="11" inputmode=“numeric” pattern="[0-9]*"
       value="00:00:00:00" />
     <p></p>
@@ -29,8 +29,8 @@
 
   <!--sloppy workaround for JQuery unintended behavior-->
   <p id="padding"></p>
-  <div class="center" id="third">
-    <!--<h2>End Timecode</h2>-->
+  <div class="third" id="third">
+     <label for="end">Third:</label><!--<h2>End Timecode</h2>-->
     <input class="input" id="thirdInput" minlength="11" maxlength="11" inputmode=“numeric” pattern="[0-9]*"
       value="00:00:00:00" />
     <p></p>

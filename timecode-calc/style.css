@@ -13,7 +13,11 @@
   font-style: normal;
 }
 
-
+label{
+  display: inline-block;
+  padding-right: .5rem;
+  text-align: right;
+}
 .input {
   max-width: 11.25rem;
   font-size: 2.25rem;
@@ -37,6 +41,24 @@ input:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.start {
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  right: 1.75rem;
+}
+.end {
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  right: 1.5rem;
+}
+.third {
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  right: 1.88rem;
 }
 h1 {
   font-family: 'NPX', sans-serif;
