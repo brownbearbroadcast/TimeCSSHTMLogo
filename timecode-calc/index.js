@@ -47,7 +47,7 @@ function flagSubmit(){
     }
     if (flag == "Logo Insertion"){
       // SOP cologo + transition
-      var tenSeconds = new DropFrame(0,13,0,0);
+      var tenSeconds = new DropFrame(0,12,0,0);
       var logoStart = thirdTimecode.duration(topTimecode, bottomTimecode);
       var coLogo = logoStart.subtract(tenSeconds);
       var logoDuration =thirdTimecode.duration(bottomTimecode, thirdTimecode);
