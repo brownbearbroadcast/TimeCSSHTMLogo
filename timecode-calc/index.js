@@ -15,10 +15,13 @@ function flagSubmit(){
     const flag = document.getElementById("operation").value;
     let end = document.getElementById("end").value;
     let start = document.getElementById("start").value;
+    let third = document.getElementById("thirdInput").value;
     let topTimecode = new DropFrame(Number(start.slice(9,11)), Number(start.slice(6,8)), Number(start.slice(3,5)), Number(start.slice(0,2)));
     topTimecode.display();
     let bottomTimecode = new DropFrame(Number(end.slice(9,11)), Number(end.slice(6,8)), Number(end.slice(3,5)), Number(end.slice(0,2)));
     bottomTimecode.display();
+    let thirdTimecode = new DropFrame(Number(third.slice(9,11)), Number(third.slice(6,8)), Number(third.slice(3,5)), Number(third.slice(0,2))); 
+    thirdTimecode.display();
     console.log(flag);
   
     if (flag == "Duration"){
@@ -26,16 +29,31 @@ function flagSubmit(){
         return;
     }
     var resultant = topTimecode.duration(topTimecode, bottomTimecode);
-    }
-    if (flag == "Add"){
+    console.log(resultant);
+    document.getElementById("result").innerHTML = "Duration: " + resultant.string();
+  }
+    if (flag == "Addition"){
     var resultant = topTimecode.add(bottomTimecode);
-    }
-    if (flag == "Subtract"){
+    console.log(resultant);
+    document.getElementById("result").innerHTML = "Result: " + resultant.string();    
+  }
+    if (flag == "Subtraction"){
       if (topTimecode.subtract(bottomTimecode) == undefined) {
         return;
       }
-       var resultant = topTimecode.subtract(bottomTimecode);
+      var resultant = topTimecode.subtract(bottomTimecode);
+      console.log(resultant);
+      document.getElementById("result").innerHTML = "Result: " + resultant.string();
     }
-    console.log(resultant);
-    document.getElementById("result").innerHTML = resultant.string(new Intl.NumberFormat('en-US', {  minimumIntegerDigits: 2 }));
+    if (flag == "Logo Insertion"){
+      // SOP cologo + transition
+      var tenSeconds = new DropFrame(0,13,0,0);
+      var logoStart = thirdTimecode.duration(topTimecode, bottomTimecode);
+      var coLogo = logoStart.subtract(tenSeconds);
+      var logoDuration =thirdTimecode.duration(bottomTimecode, thirdTimecode);
+      document.getElementById("result").innerHTML = "Cologo: " + coLogo.string() + "   Duration: 00:00:10:00<p></p>" + "Logo: " + logoStart.string() + " Duration: " + logoDuration.string();
+
+    }
+  
+   
 }
