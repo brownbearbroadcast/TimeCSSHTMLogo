@@ -5,7 +5,7 @@ document.getElementById("operation").addEventListener("change", e => {
     console.log(document.getElementById("operation").value);
     $("#third").show();
     $("#padding").show();
-    document.getElementById("topLabel").innerHTML = "Segment Start: "
+    document.getElementById("topLabel").innerHTML = "Seg Start: "
     document.getElementById("top").setAttribute("class","segmentStart");
     document.getElementById("bottomLabel").innerHTML = "Logo In: ";
     document.getElementById("bottom").setAttribute("class","logoIn");
