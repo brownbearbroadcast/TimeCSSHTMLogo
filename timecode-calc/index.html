@@ -14,26 +14,38 @@
     <h1>Timecode Calculator</h1>
   </div>
   <div class="center">
-    
-    <input class="input" id="start" minlength="11" maxlength="11" inputmode=“numeric”  pattern="[0-9]*" value="00:00:00:00" />
+
+    <input class="input" id="start" minlength="11" maxlength="11" inputmode=“numeric” pattern="[0-9]*"
+      value="00:00:00:00" />
   </div>
   <p></p>
   <div class="center">
     <!--<h2>End Timecode</h2>-->
-    <input class="input" id="end" minlength="11" maxlength="11" inputmode=“numeric”  pattern="[0-9]*" value="00:00:00:00" />
+    <input class="input" id="end" minlength="11" maxlength="11" inputmode=“numeric” pattern="[0-9]*"
+      value="00:00:00:00" />
+    <p></p>
+  </div>
+
+  <!--sloppy workaround for JQuery unintended behavior-->
+  <p id="padding"></p>
+  <div class="center" id="third">
+    <!--<h2>End Timecode</h2>-->
+    <input class="input" id="thirdInput" minlength="11" maxlength="11" inputmode=“numeric” pattern="[0-9]*"
+      value="00:00:00:00" />
     <p></p>
   </div>
   <div class="center">
     <p>Format: HH:MM:SS:FF</p>
   </div>
   <div class="center">
-<select name="operation" id="operation">
-  <option value="Duration" selected>Duration</option>
-  <option value="Add">Add</option>
-  <option value="Subtract">Subtract</option>
-</select>
+    <select name="operation" id="operation">
+      <option value="Duration" selected>Duration</option>
+      <option value="Add">Add</option>
+      <option value="Subtract">Subtract</option>
+      <option value="Logo Insertion">Logo Insertion</option>
+    </select>
 
-<button onclick="flagSubmit()" type="button">Submit</button>
+    <button onclick="flagSubmit()" type="button">Submit</button>
   </div>
   <div class="center">
     <h2>Result</h2>
@@ -45,8 +57,15 @@
   <script src="index.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js"></script>
   <script src="javascript/startInput.js"></script>
-  <script src="javascript/endInput.js" ></script>
+  <script src="javascript/endInput.js"></script>
+  <script src="javascript/thirdInput.js"></script>
+  <script>
+    if(document.getElementById("operation").value != "Logo Insertion"){
+    $("#third").hide();
+    $("#padding").hide();      
+    }
 
+  </script>
 
 </body>
 

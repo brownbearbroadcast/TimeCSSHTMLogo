@@ -1,3 +1,16 @@
+
+document.getElementById("operation").addEventListener("change", e => {
+
+  if (document.getElementById("operation").value == "Logo Insertion") {
+    console.log(document.getElementById("operation").value);
+   $("#third").show();
+   $("#padding").show();
+  }
+  else{
+   $("#third").hide();
+   $("#padding").hide();
+  }
+});
 function flagSubmit(){
     const flag = document.getElementById("operation").value;
     let end = document.getElementById("end").value;
