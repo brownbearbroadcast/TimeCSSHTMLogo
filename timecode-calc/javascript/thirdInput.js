@@ -4,8 +4,8 @@
 // variables to allow more convienvece in converion
 // bool for if input was validated with preemptive last digit change
 // value to capture that in cases where changes x0 to 0x
-let dFProtect = false;
-let dFValue = '0';
+let thirdDFProtect = false;
+let thirdDFValue = '0';
 
 //shorthand for readability
 function setThirdValue() {
