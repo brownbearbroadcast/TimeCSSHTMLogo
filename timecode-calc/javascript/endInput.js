@@ -1,15 +1,25 @@
 //obfuscation so the code is not 10 miles long
 //sets end input box value from array
 
+// variables to allow more convienvece in converion
+// bool for if input was validated with preemptive last digit change
+// value to capture that in cases where changes x0 to 0x
+let dFProtect = false;
+let dFValue = '0';
+
+//shorthand for readability
 function setEndValue() {
   $("#end").val(endValArr.join(""));
 }
+// initializes array
+// this method allows us to change two variables at once easily
+// and helps with conversion to DropFreame object
 let endValArr = ['0', '0', ':', '0', '0', ':', '0', '0', ';', '0', '0'];
 //this is a janky solution but I never claimed to be a front-end engineer
 if (document.getElementById("end").value != "00:00:00;00") {
   endValArr = document.getElementById("end").value.split("");
 }
-//lazyness
+//shorthand for readability
 function goodInput() {
   console.log("good input! :)");
 }
@@ -21,14 +31,22 @@ function setEndCaret(index) {
   document.getElementById("end").setSelectionRange(index + 1, index + 1);
   goodInput();
 }
-//further encapsulation of code.
+//applies input validation while backspacing. TODO: Copy/Paste by selection functionalty.
 function endBackspace(index, caret) {
   endValArr[index] = '0';
+  if (endValArr[4] != '0' && endValArr[6] == '0' && endValArr[7] == '0' && endValArr[9] == '0'){
+    endValArr[10] = '2';
+  }
   setEndValue();
   setEndCaret(caret);
 }
+//combines all the shared elements of key input & validation into one method
+
 function setEndValueAndCaret(index, val, caret) {
   endValArr[index] = val;
+  if (endValArr[4] != '0' && endValArr[6] == '0' && endValArr[7] == '0' && endValArr[9] == '0'){
+    endValArr[10] = '2';
+  }
   setEndValue();
   setEndCaret(caret);
 }
@@ -165,9 +183,10 @@ document.getElementById("end").addEventListener("keydown", e => {
         break;
       }
       if (numArr.includes(e.key)) {
-          if(e.key != '0' && endValArr[9] == '0' && dFArr.includes(endValArr[10])){
+ /*         if(e.key != '0' && (endValArr[6] == '0' && endValArr[7] == '0') && endValArr[9] == '0' && dFArr.includes(endValArr[10])){
           endValArr[10] = '2';
-        }
+   
+        } */
         setEndValueAndCaret(4, e.key, index + 1);
         break;
       }
@@ -189,7 +208,10 @@ document.getElementById("end").addEventListener("keydown", e => {
         endBackspace(4, index - 2);
         break;
       }
-      if (zFArr.includes(e.key)) {
+     if (zFArr.includes(e.key)) {
+       /* if (endValArr[4] != '0' && endValArr[7] == '0' && e.key == '0' && endValArr[9] == '0' && dFArr.includes(endValArr[10])){
+          endValArr[10] = '2';
+        } */
         setEndValueAndCaret(6, e.key, index + 1);
         break;
       }
@@ -234,9 +256,9 @@ document.getElementById("end").addEventListener("keydown", e => {
         break;
       }
       if (numArr.includes(e.key)) {
-        if (e.key == '0' && endValArr[4] != '0' && dFArr.includes(endValArr[10])) {
-          endValArr[10] = '2';
-        }
+        // if (e.key == '0' && endValArr[4] != '0' && dFArr.includes(endValArr[10])) {
+        //   endValArr[10] = '2';
+        // }
         setEndValueAndCaret(7, e.key, index + 1);
       }
       break;
@@ -300,7 +322,7 @@ document.getElementById("end").addEventListener("keydown", e => {
         endBackspace(9, index - 3);
         break;
       }
-      if (endValArr[6] == 0 && endValArr[7] == 0 && endValArr[4] != 0) {
+    if (endValArr[6] == 0 && endValArr[7] == 0 && endValArr[4] != 0 && endValArr[9] == 0) {
         if (!(dFArr.includes(e.key))) {
           setEndValueAndCaret(10, e.key, index);
           break;
@@ -325,6 +347,10 @@ document.getElementById("end").addEventListener("keydown", e => {
         break;
       }
       if (e.key == "Backspace") {
+        if (endValArr[4] != '0' && endValArr[6] == '0' && endValArr[7] == '0' && endValArr[9] == '0'){
+          setEndValueAndCaret(10, '2', index-2);
+          break;
+        }
         endBackspace(10, index - 2);
         break;
       }

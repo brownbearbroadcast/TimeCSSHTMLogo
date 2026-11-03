@@ -144,26 +144,6 @@ class DropFrame {
         let minutes = Math.floor(1 / 1800.00 * (frame_count + 2 * Math.floor((frame_count - (107892 * h)) / 1800.0) - 2 * Math.floor((frame_count - (107892 * h)) / 18000.0) - 107892 * h));
         let seconds = Math.floor(1 / 30 * (frame_count - 1798 * minutes - 2 * Math.floor(minutes / 10.0) - 107892 * h));
         let frames = Math.floor(frame_count - 30 * seconds - 1798 * minutes - 2 * Math.floor(minutes / 10.0) - 107892 * h);
-        if (minutes != 0 && minutes % 10 != 0) {
-            switch (frames) {
-                case 0:
-                    seconds -= 1;
-                    frames = 28;
-                    break;
-                case 1:
-                    seconds -= 1;
-                    frames = 29;
-                    break;
-            }
-            if (seconds == -1) {
-                minutes--;
-                seconds = 29;
-            }
-            if (minutes == -1) {
-                hours--;
-                minutes = 59;
-            }
-        }
         return new DropFrame(frames, seconds, minutes, hours);
     }
     display() {

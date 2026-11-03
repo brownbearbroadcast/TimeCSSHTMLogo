@@ -1,15 +1,25 @@
 //obfuscation so the code is not 10 miles long
 //sets start input box value from array
 
+// variables to allow more convienvece in converion
+// bool for if input was validated with preemptive last digit change
+// value to capture that in cases where changes x0 to 0x
+let dFProtect = false;
+let dFValue = '0';
+
+//shorthand for readability
 function setStartValue() {
   $("#start").val(startValArr.join(""));
 }
+// initializes array
+// this method allows us to change two variables at once easily
+// and helps with conversion to DropFreame object
 let startValArr = ['0', '0', ':', '0', '0', ':', '0', '0', ';', '0', '0'];
 //this is a janky solution but I never claimed to be a front-end engineer
 if (document.getElementById("start").value != "00:00:00;00") {
   startValArr = document.getElementById("start").value.split("");
 }
-//lazyness
+//shorthand for readability
 function goodInput() {
   console.log("good input! :)");
 }
@@ -21,14 +31,22 @@ function setStartCaret(index) {
   document.getElementById("start").setSelectionRange(index + 1, index + 1);
   goodInput();
 }
-//further encapsulation of code.
+//applies input validation while backspacing. TODO: Copy/Paste by selection functionalty.
 function startBackspace(index, caret) {
-  console.log("hello there");
-  setStartValueAndCaret(index, '0', caret);
-  console.log("what");
+  startValArr[index] = '0';
+  if (startValArr[4] != '0' && startValArr[6] == '0' && startValArr[7] == '0' && startValArr[9] == '0'){
+    startValArr[10] = '2';
+  }
+  setStartValue();
+  setStartCaret(caret);
 }
+//combines all the shared elements of key input & validation into one method
+
 function setStartValueAndCaret(index, val, caret) {
   startValArr[index] = val;
+  if (startValArr[4] != '0' && startValArr[6] == '0' && startValArr[7] == '0' && startValArr[9] == '0'){
+    startValArr[10] = '2';
+  }
   setStartValue();
   setStartCaret(caret);
 }
@@ -86,7 +104,6 @@ document.getElementById("start").addEventListener("keydown", e => {
       }
       if (e.key == "Backspace") {
         startBackspace(0, index - 2);
-        console.log();
         break;
       }
       if (startValArr[0] == '2') {
@@ -166,9 +183,10 @@ document.getElementById("start").addEventListener("keydown", e => {
         break;
       }
       if (numArr.includes(e.key)) {
-          if(e.key != '0' && startValArr[9] == '0' && dFArr.includes(startValArr[10])){
+ /*         if(e.key != '0' && (startValArr[6] == '0' && startValArr[7] == '0') && startValArr[9] == '0' && dFArr.includes(startValArr[10])){
           startValArr[10] = '2';
-        }
+   
+        } */
         setStartValueAndCaret(4, e.key, index + 1);
         break;
       }
@@ -190,7 +208,10 @@ document.getElementById("start").addEventListener("keydown", e => {
         startBackspace(4, index - 2);
         break;
       }
-      if (zFArr.includes(e.key)) {
+     if (zFArr.includes(e.key)) {
+       /* if (startValArr[4] != '0' && startValArr[7] == '0' && e.key == '0' && startValArr[9] == '0' && dFArr.includes(startValArr[10])){
+          startValArr[10] = '2';
+        } */
         setStartValueAndCaret(6, e.key, index + 1);
         break;
       }
@@ -235,9 +256,9 @@ document.getElementById("start").addEventListener("keydown", e => {
         break;
       }
       if (numArr.includes(e.key)) {
-        if (e.key == '0' && startValArr[4] != '0' && dFArr.includes(startValArr[10])) {
-          startValArr[10] = '2';
-        }
+        // if (e.key == '0' && startValArr[4] != '0' && dFArr.includes(startValArr[10])) {
+        //   startValArr[10] = '2';
+        // }
         setStartValueAndCaret(7, e.key, index + 1);
       }
       break;
@@ -301,7 +322,7 @@ document.getElementById("start").addEventListener("keydown", e => {
         startBackspace(9, index - 3);
         break;
       }
-      if (startValArr[6] == 0 && startValArr[7] == 0 && startValArr[4] != 0) {
+    if (startValArr[6] == 0 && startValArr[7] == 0 && startValArr[4] != 0 && startValArr[9] == 0) {
         if (!(dFArr.includes(e.key))) {
           setStartValueAndCaret(10, e.key, index);
           break;
@@ -326,6 +347,10 @@ document.getElementById("start").addEventListener("keydown", e => {
         break;
       }
       if (e.key == "Backspace") {
+        if (startValArr[4] != '0' && startValArr[6] == '0' && startValArr[7] == '0' && startValArr[9] == '0'){
+          setStartValueAndCaret(10, '2', index-2);
+          break;
+        }
         startBackspace(10, index - 2);
         break;
       }

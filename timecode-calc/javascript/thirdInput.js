@@ -1,15 +1,25 @@
 //obfuscation so the code is not 10 miles long
 //sets third input box value from array
 
+// variables to allow more convienvece in converion
+// bool for if input was validated with preemptive last digit change
+// value to capture that in cases where changes x0 to 0x
+let dFProtect = false;
+let dFValue = '0';
+
+//shorthand for readability
 function setThirdValue() {
-  $("#thirdInput").val(thirdValArr.join(""));
+  $("#third").val(thirdValArr.join(""));
 }
+// initializes array
+// this method allows us to change two variables at once easily
+// and helps with conversion to DropFreame object
 let thirdValArr = ['0', '0', ':', '0', '0', ':', '0', '0', ';', '0', '0'];
 //this is a janky solution but I never claimed to be a front-end engineer
-if (document.getElementById("thirdInput").value != "00:00:00;00") {
-  thirdValArr = document.getElementById("thirdInput").value.split("");
+if (document.getElementById("third").value != "00:00:00;00") {
+  thirdValArr = document.getElementById("third").value.split("");
 }
-//lazyness
+//shorthand for readability
 function goodInput() {
   console.log("good input! :)");
 }
@@ -18,23 +28,31 @@ function badInput() {
 }
 //by default, caret goes to right. to keep same, insert index - 1.
 function setThirdCaret(index) {
-  document.getElementById("thirdInput").setSelectionRange(index + 1, index + 1);
+  document.getElementById("third").setSelectionRange(index + 1, index + 1);
   goodInput();
 }
-//further encapsulation of code.
+//applies input validation while backspacing. TODO: Copy/Paste by selection functionalty.
 function thirdBackspace(index, caret) {
   thirdValArr[index] = '0';
+  if (thirdValArr[4] != '0' && thirdValArr[6] == '0' && thirdValArr[7] == '0' && thirdValArr[9] == '0'){
+    thirdValArr[10] = '2';
+  }
   setThirdValue();
   setThirdCaret(caret);
 }
+//combines all the shared elements of key input & validation into one method
+
 function setThirdValueAndCaret(index, val, caret) {
   thirdValArr[index] = val;
+  if (thirdValArr[4] != '0' && thirdValArr[6] == '0' && thirdValArr[7] == '0' && thirdValArr[9] == '0'){
+    thirdValArr[10] = '2';
+  }
   setThirdValue();
   setThirdCaret(caret);
 }
 //this can probs be 1 equation via obfuscation but just trying to make work right now.
 
-document.getElementById("thirdInput").addEventListener("keydown", e => {
+document.getElementById("third").addEventListener("keydown", e => {
   console.log("Carat at: ", e.target.selectionStart);
   const index = e.target.selectionStart;
   // arrays that define acceptable number inputs for differnt slots
@@ -165,9 +183,10 @@ document.getElementById("thirdInput").addEventListener("keydown", e => {
         break;
       }
       if (numArr.includes(e.key)) {
-          if(e.key != '0' && thirdValArr[9] == '0' && dFArr.includes(thirdValArr[10])){
+ /*         if(e.key != '0' && (thirdValArr[6] == '0' && thirdValArr[7] == '0') && thirdValArr[9] == '0' && dFArr.includes(thirdValArr[10])){
           thirdValArr[10] = '2';
-        }
+   
+        } */
         setThirdValueAndCaret(4, e.key, index + 1);
         break;
       }
@@ -189,7 +208,10 @@ document.getElementById("thirdInput").addEventListener("keydown", e => {
         thirdBackspace(4, index - 2);
         break;
       }
-      if (zFArr.includes(e.key)) {
+     if (zFArr.includes(e.key)) {
+       /* if (thirdValArr[4] != '0' && thirdValArr[7] == '0' && e.key == '0' && thirdValArr[9] == '0' && dFArr.includes(thirdValArr[10])){
+          thirdValArr[10] = '2';
+        } */
         setThirdValueAndCaret(6, e.key, index + 1);
         break;
       }
@@ -234,9 +256,9 @@ document.getElementById("thirdInput").addEventListener("keydown", e => {
         break;
       }
       if (numArr.includes(e.key)) {
-        if (e.key == '0' && thirdValArr[4] != '0' && dFArr.includes(thirdValArr[10])) {
-          thirdValArr[10] = '2';
-        }
+        // if (e.key == '0' && thirdValArr[4] != '0' && dFArr.includes(thirdValArr[10])) {
+        //   thirdValArr[10] = '2';
+        // }
         setThirdValueAndCaret(7, e.key, index + 1);
       }
       break;
@@ -300,7 +322,7 @@ document.getElementById("thirdInput").addEventListener("keydown", e => {
         thirdBackspace(9, index - 3);
         break;
       }
-      if (thirdValArr[6] == 0 && thirdValArr[7] == 0 && thirdValArr[4] != 0) {
+    if (thirdValArr[6] == 0 && thirdValArr[7] == 0 && thirdValArr[4] != 0 && thirdValArr[9] == 0) {
         if (!(dFArr.includes(e.key))) {
           setThirdValueAndCaret(10, e.key, index);
           break;
@@ -325,6 +347,10 @@ document.getElementById("thirdInput").addEventListener("keydown", e => {
         break;
       }
       if (e.key == "Backspace") {
+        if (thirdValArr[4] != '0' && thirdValArr[6] == '0' && thirdValArr[7] == '0' && thirdValArr[9] == '0'){
+          setThirdValueAndCaret(10, '2', index-2);
+          break;
+        }
         thirdBackspace(10, index - 2);
         break;
       }
