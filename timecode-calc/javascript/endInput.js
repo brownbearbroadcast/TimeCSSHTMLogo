@@ -40,6 +40,12 @@ function endBackspace(index, caret) {
   setEndValue();
   setEndCaret(caret);
 }
+//function to go to next input on enter
+function thirdOnEnter(key) {
+  if (key == "Enter") {
+    document.getElementById("thirdInput").focus();
+  }
+}
 //combines all the shared elements of key input & validation into one method
 
 function setEndValueAndCaret(index, val, caret) {
@@ -53,6 +59,8 @@ function setEndValueAndCaret(index, val, caret) {
 //this can probs be 1 equation via obfuscation but just trying to make work right now.
 
 document.getElementById("end").addEventListener("keydown", e => {
+  e.preventDefault();
+  thirdOnEnter(e.key);
   console.log("Carat at: ", e.target.selectionStart);
   const index = e.target.selectionStart;
   // arrays that define acceptable number inputs for differnt slots
@@ -69,7 +77,7 @@ document.getElementById("end").addEventListener("keydown", e => {
   // input validation for all 11 chars #sobbing-and/or-crying
   switch (index) {
     case 0:
-      e.preventDefault();
+      
       // adding to every case so that arrow keys work
       if (e.key == "ArrowRight") {
         setEndCaret(index);
@@ -93,7 +101,7 @@ document.getElementById("end").addEventListener("keydown", e => {
 
 
     case 1:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setEndCaret(index - 2);
         break;
@@ -125,7 +133,7 @@ document.getElementById("end").addEventListener("keydown", e => {
 
 
     case 2:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setEndCaret(index - 2);
         break;
@@ -147,7 +155,7 @@ document.getElementById("end").addEventListener("keydown", e => {
 
 
     case 3:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setEndCaret(index - 3);
         break;
@@ -169,7 +177,7 @@ document.getElementById("end").addEventListener("keydown", e => {
 
 
     case 4:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setEndCaret(index - 2);
         break;
@@ -195,7 +203,7 @@ document.getElementById("end").addEventListener("keydown", e => {
 
 
     case 5:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setEndCaret(index - 2);
         break;
@@ -220,7 +228,7 @@ document.getElementById("end").addEventListener("keydown", e => {
 
 
     case 6:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setEndCaret(index - 3);
         break;
@@ -242,7 +250,7 @@ document.getElementById("end").addEventListener("keydown", e => {
 
 
     case 7:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setEndCaret(index - 2);
         break;
@@ -265,7 +273,7 @@ document.getElementById("end").addEventListener("keydown", e => {
 
 
     case 8:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setEndCaret(index - 2);
         break;
@@ -287,7 +295,7 @@ document.getElementById("end").addEventListener("keydown", e => {
 
 
     case 9:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setEndCaret(index - 3);
         break;
@@ -309,7 +317,7 @@ document.getElementById("end").addEventListener("keydown", e => {
 
 
     case 10:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setEndCaret(index - 2);
         break;
@@ -341,7 +349,7 @@ document.getElementById("end").addEventListener("keydown", e => {
 
 
     case 11:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setEndCaret(index - 2);
         break;

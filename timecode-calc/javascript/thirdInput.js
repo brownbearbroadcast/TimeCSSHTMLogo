@@ -9,15 +9,15 @@ let thirdDFValue = '0';
 
 //shorthand for readability
 function setThirdValue() {
-  $("#third").val(thirdValArr.join(""));
+  $("#thirdInput").val(thirdValArr.join(""));
 }
 // initializes array
 // this method allows us to change two variables at once easily
 // and helps with conversion to DropFreame object
 let thirdValArr = ['0', '0', ':', '0', '0', ':', '0', '0', ';', '0', '0'];
 //this is a janky solution but I never claimed to be a front-end engineer
-if (document.getElementById("third").value != "00:00:00;00") {
-  thirdValArr = document.getElementById("third").value.split("");
+if (document.getElementById("thirdInput").value != "00:00:00;00") {
+  thirdValArr = document.getElementById("thirdInput").value.split("");
 }
 //shorthand for readability
 function goodInput() {
@@ -28,7 +28,7 @@ function badInput() {
 }
 //by default, caret goes to right. to keep same, insert index - 1.
 function setThirdCaret(index) {
-  document.getElementById("third").setSelectionRange(index + 1, index + 1);
+  document.getElementById("thirdInput").setSelectionRange(index + 1, index + 1);
   goodInput();
 }
 //applies input validation while backspacing. TODO: Copy/Paste by selection functionalty.
@@ -40,8 +40,14 @@ function thirdBackspace(index, caret) {
   setThirdValue();
   setThirdCaret(caret);
 }
-//combines all the shared elements of key input & validation into one method
+//function to submit on enter key press
+function submitOnEnter(key) {
+  if (key === "Enter") {
+    flagSubmit();
+  }
+}
 
+//combines all the shared elements of key input & validation into one method
 function setThirdValueAndCaret(index, val, caret) {
   thirdValArr[index] = val;
   if (thirdValArr[4] != '0' && thirdValArr[6] == '0' && thirdValArr[7] == '0' && thirdValArr[9] == '0'){
@@ -52,7 +58,8 @@ function setThirdValueAndCaret(index, val, caret) {
 }
 //this can probs be 1 equation via obfuscation but just trying to make work right now.
 
-document.getElementById("third").addEventListener("keydown", e => {
+document.getElementById("thirdInput").addEventListener("keydown", e => {
+   e.preventDefault();
   console.log("Carat at: ", e.target.selectionStart);
   const index = e.target.selectionStart;
   // arrays that define acceptable number inputs for differnt slots
@@ -66,10 +73,12 @@ document.getElementById("third").addEventListener("keydown", e => {
   const numArr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   // drop frame invalid 00/01
   const dFArr = ['0', '1'];
+   
+   submitOnEnter(e.key);
   // input validation for all 11 chars #sobbing-and/or-crying
   switch (index) {
     case 0:
-      e.preventDefault();
+     
       // adding to every case so that arrow keys work
       if (e.key == "ArrowRight") {
         setThirdCaret(index);
@@ -93,7 +102,7 @@ document.getElementById("third").addEventListener("keydown", e => {
 
 
     case 1:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setThirdCaret(index - 2);
         break;
@@ -125,7 +134,7 @@ document.getElementById("third").addEventListener("keydown", e => {
 
 
     case 2:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setThirdCaret(index - 2);
         break;
@@ -147,7 +156,7 @@ document.getElementById("third").addEventListener("keydown", e => {
 
 
     case 3:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setThirdCaret(index - 3);
         break;
@@ -169,7 +178,7 @@ document.getElementById("third").addEventListener("keydown", e => {
 
 
     case 4:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setThirdCaret(index - 2);
         break;
@@ -195,7 +204,7 @@ document.getElementById("third").addEventListener("keydown", e => {
 
 
     case 5:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setThirdCaret(index - 2);
         break;
@@ -220,7 +229,7 @@ document.getElementById("third").addEventListener("keydown", e => {
 
 
     case 6:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setThirdCaret(index - 3);
         break;
@@ -242,7 +251,7 @@ document.getElementById("third").addEventListener("keydown", e => {
 
 
     case 7:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setThirdCaret(index - 2);
         break;
@@ -265,7 +274,7 @@ document.getElementById("third").addEventListener("keydown", e => {
 
 
     case 8:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setThirdCaret(index - 2);
         break;
@@ -287,7 +296,7 @@ document.getElementById("third").addEventListener("keydown", e => {
 
 
     case 9:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setThirdCaret(index - 3);
         break;
@@ -309,7 +318,7 @@ document.getElementById("third").addEventListener("keydown", e => {
 
 
     case 10:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setThirdCaret(index - 2);
         break;
@@ -341,7 +350,7 @@ document.getElementById("third").addEventListener("keydown", e => {
 
 
     case 11:
-      e.preventDefault();
+      
       if (e.key == "ArrowLeft") {
         setThirdCaret(index - 2);
         break;
