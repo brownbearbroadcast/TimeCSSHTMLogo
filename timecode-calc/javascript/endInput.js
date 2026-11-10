@@ -51,7 +51,9 @@ function thirdOnEnter(key) {
 function setEndValueAndCaret(index, val, caret) {
   endValArr[index] = val;
   if (endValArr[4] != '0' && endValArr[6] == '0' && endValArr[7] == '0' && endValArr[9] == '0'){
-    endValArr[10] = '2';
+    if (!(index == 10 && (val != '0' && val != '1'))){
+      endValArr[10] = '2';
+    }
   }
   setEndValue();
   setEndCaret(caret);

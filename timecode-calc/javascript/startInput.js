@@ -49,9 +49,11 @@ function endOnEnter(key) {
 //combines all the shared elements of key input & validation into one method
 
 function setStartValueAndCaret(index, val, caret) {
-  startValArr[index] = val;
+  startValArr[index] = val;  
   if (startValArr[4] != '0' && startValArr[6] == '0' && startValArr[7] == '0' && startValArr[9] == '0'){
+    if (!(index == 10 && (val != '0' && val != '1'))){
     startValArr[10] = '2';
+    }
   }
   setStartValue();
   setStartCaret(caret);

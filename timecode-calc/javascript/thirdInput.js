@@ -51,7 +51,9 @@ function submitOnEnter(key) {
 function setThirdValueAndCaret(index, val, caret) {
   thirdValArr[index] = val;
   if (thirdValArr[4] != '0' && thirdValArr[6] == '0' && thirdValArr[7] == '0' && thirdValArr[9] == '0'){
+    if (!(index == 10 && (val != '0' && val != '1'))){
     thirdValArr[10] = '2';
+    }
   }
   setThirdValue();
   setThirdCaret(caret);
